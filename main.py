@@ -12,11 +12,12 @@ def DividedDifferences(x, y, valid):
         for j in range(n - 1 - i): #em cada iteração (ordem), calcular as diferenças
             number = delta[j + 1] - delta[j] #calcula o numerador
             denom = x[j + 1 + i] - x[j] #calcula o denominador
-            delta[j] = number / denom # calcula a diferença
             if (valid):
-                print(f'({delta[j + 1]} - {delta[j]}) / ({x[j + 1 + i]} - {x[j]}) = {delta[j]}')
+                print(f'({delta[j + 1]} - {delta[j]}) / ({x[j + 1 + i]} - {x[j]}) = {(number / denom)}')
+            delta[j] = number / denom # calcula a diferença
         cf.append(delta[0]) #adiciona apenas o primeiro valor da ordem que é o um coeficiente do polimonio interpolador
     return cf #retorna os operadores
+
 
 
 #função que retorna a expressão do polimonio interpolador
@@ -24,7 +25,7 @@ def Equation(x, cf):
     n = len(x)
     equation = '' #começa a expressão vazia
     for i in range(n):
-        #em cada valor de xn, adiciona a equação o sinal, seguido do sinal de multiplicação caso tiver um numero ainda colocar na expressão
+        #em cada valor de xn, adiciona na equação o sinal, seguido do sinal de multiplicação caso tiver um numero ainda colocar na expressão
         equation += f'{cf[i]:+}' + '*'.join([f"(x{-xj:+})" for j, xj, in enumerate(x) if j < i])
     return equation #retorna a expressão
 
